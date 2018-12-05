@@ -18,18 +18,18 @@ namespace CasaDoCodigo.Repositories
             this._categoriaRepository = categoriaRepository;
         }
 
-        public IList<Produto> GetProdutos()
+        public async Task<IList<Produto>> GetProdutos()
         {
-            return dbSet.Include(p => p.Categoria).ToList();
+            return await dbSet.Include(p => p.Categoria).ToListAsync();
         }
 
-        public IList<Produto> GetProdutos(string pesquisa)
+        public async Task<IList<Produto>> GetProdutos(string pesquisa)
         {
             if (string.IsNullOrEmpty(pesquisa))
-                return GetProdutos();
+                return await GetProdutos();
 
-            var busca = dbSet.Include(p => p.Categoria)
-                .Where(p => p.Nome.Contains(pesquisa) || p.Categoria.Nome.Contains(pesquisa)).ToList();
+            var busca = await dbSet.Include(p => p.Categoria)
+                .Where(p => p.Nome.Contains(pesquisa) || p.Categoria.Nome.Contains(pesquisa)).ToListAsync();
             return busca;
         }
 

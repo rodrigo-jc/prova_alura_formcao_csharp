@@ -75,7 +75,7 @@ namespace CasaDoCodigo.Controllers
 
         public async Task<IActionResult> BuscaDeProdutos(string pesquisa)
         {
-            ProdutoViewModel produtoViewModel = new ProdutoViewModel(produtoRepository.GetProdutos(pesquisa), pesquisa);
+            ProdutoViewModel produtoViewModel = new ProdutoViewModel(await produtoRepository.GetProdutos(pesquisa), pesquisa);
             return base.View(produtoViewModel);
         }
     }
